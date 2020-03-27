@@ -81,11 +81,10 @@ def scrape():
     df.columns = ["Description", "values"]
     df.set_index("Description", inplace=True)
     # Convert dataframe to html
-    html_table = df.to_html()
+    html_table = df.to_html(classes="table table-striped")
     html_table = html_table.replace("\n", "")
     # Store in mars_fact_data dictionary
     mars_fact_data["mars_facts_table"] = html_table
-
 
     #    Mars Hemispheres
     # Base url
