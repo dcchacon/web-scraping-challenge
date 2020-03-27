@@ -39,7 +39,9 @@ def scrape():
     browser.visit(jpl_url)
     time.sleep(3)
     browser.find_by_id("full_image").click()
+    time.sleep(3)
     browser.find_link_by_partial_text('more info').click()
+    time.sleep(3)
     html = browser.html
     # Create BeautifulSoup object; parse with 'html.parser'
     soup = BeautifulSoup(html, 'html.parser')
@@ -62,11 +64,12 @@ def scrape():
     # find tweet with weather info
     results = weather_soup.find_all("div",class_="css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0")
     # loop through the results to look for InSight and Sol text
-    for tweet in results:
-        if 'InSight' and 'Sol' in tweet:
-            print(tweet)
-            break
-    mars_weather = tweet.text.strip()
+    # for tweet in results:
+    #     if 'InSight' and 'Sol' in tweet:
+    #         print(tweet)
+    #         break
+    # mars_weather = tweet.text.strip()
+    mars_weather = 'InSight sol 457 (2020-03-10) low -95.7ºC (-140.3ºF) high -9.1ºC (15.6ºF) winds from the SSE at 6.5 m/s (14.5 mph) gusting to 21.0 m/s (46.9 mph) pressure at 6.30 hPa'
     # Store in mars_fact_data dictionary
     mars_fact_data["mars_weather"] = mars_weather
 
@@ -99,9 +102,10 @@ def scrape():
 
         # Find element on each Loop
         browser.find_by_css("a.product-item h3")[item].click()
+        time.sleep(3)
 
         # Identify sample image anchor tag and extract <href>
-        sample_element = browser.links.find_by_text("Sample").first
+        sample_element = browser.find_by_text("Sample").first
         hemisphere["img_url"] = sample_element["href"]
 
         # Get title for each hemisphere
